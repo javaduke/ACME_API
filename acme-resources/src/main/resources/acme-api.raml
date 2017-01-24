@@ -1,0 +1,55 @@
+#%RAML 0.8
+title: ACME API
+version: 0.1
+baseUri: http://localhost:9443/acme/api
+mediaType: application/json
+
+/gadget:
+  post:
+    displayName: Create a new Gadget
+    body:
+      application/json:
+        example: !include common/examples/CreateGadgetRequest.json
+        schema: !include common/schema/gadget.json
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include acme-api/examples/CreateGadgetResponse.json
+  /{id}:
+    displayName: Update an existing Gadget
+    put:
+      body:
+        application/json:
+          example: !include common/examples/UpdateGadgetRequest.json
+          schema: !include common/schema/gadget.json
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include acme-api/examples/UpdateGadgetResponse.json
+
+/widget:
+  post:
+    displayName: Create a new Widget
+    body:
+      application/json:
+        example: !include common/examples/CreateWidgetRequest.json
+        schema: !include common/schema/gadget.json
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include acme-api/examples/CreateWidgetResponse.json
+  /{id}:
+    displayName: Update an existing Widget
+    put:
+      body:
+        application/json:
+          example: !include common/examples/UpdateWidgetRequest.json
+          schema: !include common/schema/widget.json
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include acme-api/examples/UpdateWidgetResponse.json

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:spring="http://www.springframework.org/schema/beans"
+      xsi:schemaLocation=
+              "http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+">
+    <flow name="system-two-gadget-impl.update">
+        <logger level="INFO" message="SystemTwo - Updating Gadget #[flowVars['id']]"/>
+
+        <set-payload value="#[java.util.UUID.randomUUID().toString()]"/>
+
+        <enricher target="#[flowVars['mappingScript']]">
+            <custom-transformer class="com.mulesoft.demo.util.DynamicParseTemplateTransformer">
+                <spring:property name="location" value="common/mappings/SystemAPIResponse.dw"/>
+            </custom-transformer>
+        </enricher>
+
+        <set-payload value="#[dw(flowVars['mappingScript'], 'application/json')]" mimeType="application/json"/>
+    </flow>
+
+    <flow name="system-two-gadget-impl.create">
+        <logger level="INFO" message="SystemTwo - Creating new Gadget"/>
+
+        <set-payload value="#[java.util.UUID.randomUUID().toString()]"/>
+
+        <enricher target="#[flowVars['mappingScript']]">
+            <custom-transformer class="com.mulesoft.demo.util.DynamicParseTemplateTransformer">
+                <spring:property name="location" value="common/mappings/SystemAPIResponse.dw"/>
+            </custom-transformer>
+        </enricher>
+
+        <set-payload value="#[dw(flowVars['mappingScript'], 'application/json')]" mimeType="application/json"/>
+
+    </flow>
+
+</mule>

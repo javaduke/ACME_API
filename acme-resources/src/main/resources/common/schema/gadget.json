@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "sku": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "color": {
+      "type": "string"
+    },
+    "weight": {
+      "type": "number"
+    },
+    "quantity": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "sku",
+    "name"
+  ]
+}

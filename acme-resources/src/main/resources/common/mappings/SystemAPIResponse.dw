@@ -1,0 +1,10 @@
+%dw 1.0
+%input payload application/java
+%input systemName application/java
+%output application/json
+---
+{
+  system: flowVars.systemName,
+  status: "success",
+  systemGUID: payload
+}

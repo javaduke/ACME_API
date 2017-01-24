@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:spring="http://www.springframework.org/schema/beans"
+      xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:json="http://www.mulesoft.org/schema/mule/json"
+      xsi:schemaLocation="
+            http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+            http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+
+			http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+    <flow name="acme-api.common._sendPUTRequest">
+        <scatter-gather>
+            <processor-chain>
+                <http:request config-ref="SystemAPI_HTTP" path="/acme-system-one-api/api/#[flowVars['resource']]/#[flowVars['id']]" method="PUT"/>
+                <object-to-string-transformer/>
+                <json:json-to-object-transformer returnClass="java.util.Map"/>
+            </processor-chain>
+            <processor-chain>
+                <http:request config-ref="SystemAPI_HTTP" path="/acme-system-two-api/api/#[flowVars['resource']]/#[flowVars['id']]" method="PUT"/>
+                <object-to-string-transformer/>
+                <json:json-to-object-transformer returnClass="java.util.Map"/>
+            </processor-chain>
+        </scatter-gather>
+        <flow-ref name="acme-api.common._mapResponse"/>
+    </flow>
+
+    <flow name="acme-api.common._sendPOSTRequest">
+        <scatter-gather>
+            <processor-chain>
+                <http:request config-ref="SystemAPI_HTTP" path="/acme-system-one-api/api/#[flowVars['resource']]" method="POST"/>
+                <object-to-string-transformer/>
+                <json:json-to-object-transformer returnClass="java.util.Map"/>
+            </processor-chain>
+            <processor-chain>
+                <http:request config-ref="SystemAPI_HTTP" path="/acme-system-two-api/api/#[flowVars['resource']]" method="POST"/>
+                <object-to-string-transformer/>
+                <json:json-to-object-transformer returnClass="java.util.Map"/>
+            </processor-chain>
+        </scatter-gather>
+        <flow-ref name="acme-api.common._mapResponse"/>
+    </flow>
+
+    <flow name="acme-api.common._mapResponse">
+        <combine-collections-transformer/>
+
+        <enricher target="#[flowVars['mappingScript']]">
+            <custom-transformer class="com.mulesoft.demo.util.DynamicParseTemplateTransformer">
+                <spring:property name="location" value="#['mappings/' + flowVars['resource'] + '_response.dw']"/>
+            </custom-transformer>
+        </enricher>
+
+        <set-payload value="#[dw(flowVars['mappingScript'], 'application/json')]" mimeType="application/json"/>
+    </flow>
+</mule>

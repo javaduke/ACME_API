@@ -1,0 +1,31 @@
+#%RAML 0.8
+title: ACME System One API
+version: 0.1
+baseUri: http://localhost:9443/acme-system-one/api
+mediaType: application/json
+
+/gadget:
+  post:
+    displayName: Create a new Gadget
+    body:
+      application/json:
+        example: !include common/examples/CreateGadgetRequest.json
+        schema: !include common/schema/gadget.json
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include common/examples/CreateGadgetResponse.json
+  /{id}:
+    displayName: Update an existing Gadget
+    put:
+      body:
+        application/json:
+          example: !include common/examples/UpdateGadgetRequest.json
+          schema: !include common/schema/gadget.json
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include common/examples/UpdateGadgetResponse.json
+

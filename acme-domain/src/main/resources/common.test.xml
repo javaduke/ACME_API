@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain:mule-domain xmlns="http://www.mulesoft.org/schema/mule/core"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xmlns:http="http://www.mulesoft.org/schema/mule/http"
+                    xmlns:domain="http://www.mulesoft.org/schema/mule/ee/domain"
+                    xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
+                    xsi:schemaLocation="
+              http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+              http://www.mulesoft.org/schema/mule/ee/domain http://www.mulesoft.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
+              http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd
+">
+
+    <http:listener-config name="api-httpListenerConfig" host="0.0.0.0" port="${https.port}" basePath="${basePath}" protocol="HTTPS">
+        <tls:context name="tls-context-config">
+            <tls:key-store path="${https.key.file}" password="${https.store.password}"
+                           keyPassword="${https.key.password}" type="jks"/>
+        </tls:context>
+    </http:listener-config>
+
+    <http:request-config name="SystemAPI_HTTP" host="0.0.0.0" port="${https.port}" basePath="${basePath}" protocol="HTTPS">
+        <tls:context name="tls-context-config">
+            <tls:trust-store path="${https.key.file}" password="${https.store.password}" type="jks"/>
+        </tls:context>
+    </http:request-config>
+
+</domain:mule-domain>

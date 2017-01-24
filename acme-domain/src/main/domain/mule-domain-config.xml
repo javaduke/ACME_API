@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain:mule-domain xmlns="http://www.mulesoft.org/schema/mule/core"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xmlns:http="http://www.mulesoft.org/schema/mule/http"
+                    xmlns:domain="http://www.mulesoft.org/schema/mule/ee/domain"
+                    xmlns:spring="http://www.springframework.org/schema/beans"
+                    xmlns:secure-property-placeholder="http://www.mulesoft.org/schema/mule/secure-property-placeholder"
+                    xsi:schemaLocation="
+                        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+                        http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+                        http://www.mulesoft.org/schema/mule/ee/domain http://www.mulesoft.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
+                        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+                        http://www.mulesoft.org/schema/mule/secure-property-placeholder http://www.mulesoft.org/schema/mule/secure-property-placeholder/current/mule-secure-property-placeholder.xsd
+">
+
+    <spring:beans>
+        <secure-property-placeholder:config
+                name="Secure_Property_Placeholder" key="${mule.key}" encryptionAlgorithm="Blowfish" encryptionMode="CBC"
+                location="acme-domain.${spring.profiles.active}.properties" ignoreResourceNotFound="true"/>
+
+        <spring:import resource="common.${spring.profiles.active}.xml"/>
+    </spring:beans>
+
+    <!--<http:listener-config name="api-httpListenerConfig" host="0.0.0.0" port="8081" protocol="HTTP"/>-->
+
+</domain:mule-domain>
