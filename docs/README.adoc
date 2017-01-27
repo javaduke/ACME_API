@@ -15,7 +15,7 @@ Add the path to the `java` executable to your `Path`, e.g. `Path=%JAVA_HOME%\bin
 Download and install the latest version of *Apache Maven* from https://maven.apache.org/download.cgi
 
 Unpack the distribution to e.g. `C:\Development\Tools` and create the `M2_HOME` system variable pointing to the Apache Maven root directory,
-e.g.
+e.g. `M2_HOME=C:\Development\Tools`.
 
 Add the path to the `mvn` executable to your `Path`, e.g. `Path=%M2_HOME%\bin;...`
 
