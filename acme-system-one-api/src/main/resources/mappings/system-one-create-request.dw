@@ -1,0 +1,5 @@
+%dw 1.0
+%input payload application/json
+%output application/xml
+---
+CreateGadget: payload

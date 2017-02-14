@@ -13,4 +13,5 @@
     <http:listener-config name="api-httpListenerConfig" host="0.0.0.0" port="${http.port}" basePath="${basePath}"/>
 
     <http:request-config name="SystemAPI_HTTP" host="0.0.0.0" port="${http.port}" basePath="${basePath}" />
+
 </domain:mule-domain>

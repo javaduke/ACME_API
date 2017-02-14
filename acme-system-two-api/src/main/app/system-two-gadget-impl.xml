@@ -8,30 +8,41 @@
     <flow name="system-two-gadget-impl.update">
         <logger level="INFO" message="SystemTwo - Updating Gadget #[flowVars['id']]"/>
 
-        <set-payload value="#[java.util.UUID.randomUUID().toString()]"/>
+        <set-variable variableName="_requestMappingScriptName" value="mappings/system-two-update-request.dw"/>
+        <set-variable variableName="_responseMappingScriptName" value="common/mappings/SystemAPIResponse.dw"/>
 
-        <enricher target="#[flowVars['mappingScript']]">
-            <custom-transformer class="com.mulesoft.demo.util.DynamicParseTemplateTransformer">
-                <spring:property name="location" value="common/mappings/SystemAPIResponse.dw"/>
-            </custom-transformer>
-        </enricher>
-
-        <set-payload value="#[dw(flowVars['mappingScript'], 'application/json')]" mimeType="application/json"/>
+        <flow-ref name="system-two-gadget-impl.callSystemTwo"/>
     </flow>
 
     <flow name="system-two-gadget-impl.create">
         <logger level="INFO" message="SystemTwo - Creating new Gadget"/>
 
-        <set-payload value="#[java.util.UUID.randomUUID().toString()]"/>
+        <set-variable variableName="_requestMappingScriptName" value="mappings/system-two-create-request.dw"/>
+        <set-variable variableName="_responseMappingScriptName" value="common/mappings/SystemAPIResponse.dw"/>
 
-        <enricher target="#[flowVars['mappingScript']]">
+        <flow-ref name="system-two-gadget-impl.callSystemTwo"/>
+    </flow>
+
+    <flow name="system-two-gadget-impl.callSystemTwo">
+        <enricher target="#[flowVars['requestMappingScript']]">
             <custom-transformer class="com.mulesoft.demo.util.DynamicParseTemplateTransformer">
-                <spring:property name="location" value="common/mappings/SystemAPIResponse.dw"/>
+                <spring:property name="location" value="#[flowVars['_requestMappingScriptName']]"/>
             </custom-transformer>
         </enricher>
 
-        <set-payload value="#[dw(flowVars['mappingScript'], 'application/json')]" mimeType="application/json"/>
+        <enricher target="#[flowVars['responseMappingScript']]">
+            <custom-transformer class="com.mulesoft.demo.util.DynamicParseTemplateTransformer">
+                <spring:property name="location" value="#[flowVars['_responseMappingScriptName']]"/>
+            </custom-transformer>
+        </enricher>
 
+        <set-payload value="#[dw(flowVars['requestMappingScript'], 'application/json')]" mimeType="application/json"/>
+
+        <!-- This code simulates call to the underlying SystemTwo which returns the ID of the gadget -->
+        <set-payload value="#[java.util.UUID.randomUUID().toString()]"/>
+        <!-- This code simulates call to the underlying SystemTwo which returns the ID of the gadget  -->
+
+        <set-payload value="#[dw(flowVars['responseMappingScript'], 'application/json')]" mimeType="application/json"/>
     </flow>
 
 </mule>
