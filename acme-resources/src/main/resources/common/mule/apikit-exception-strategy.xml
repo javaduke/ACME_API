@@ -6,7 +6,7 @@
               "http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
               http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
 ">
-    <apikit:mapping-exception-strategy name="acme-system-one-api-apiKitGlobalExceptionMapping">
+    <apikit:mapping-exception-strategy name="acme-system-api-apiKitGlobalExceptionMapping">
         <apikit:mapping statusCode="404">
             <apikit:exception value="org.mule.module.apikit.exception.NotFoundException" />
             <set-property propertyName="Content-Type" value="application/json" />

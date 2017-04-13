@@ -36,6 +36,10 @@
                             <groupId>com.mulesoft.security</groupId>
                             <artifactId>mule-module-security-property-placeholder</artifactId>
                         </inclusion>
+                        <inclusion>
+                            <groupId>${project.parent.groupId}</groupId>
+                            <artifactId>acme-resources</artifactId>
+                        </inclusion>
                     </inclusions>
 
                 </configuration>
@@ -57,6 +61,11 @@
     </pluginRepositories>
 
     <dependencies>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>acme-resources</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.mule.modules</groupId>
             <artifactId>mule-module-http</artifactId>

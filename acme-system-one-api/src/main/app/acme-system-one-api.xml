@@ -21,7 +21,7 @@
         <http:listener config-ref="api-httpListenerConfig" path="/acme-system-one-api/api/*"/>
         <set-variable variableName="systemName" value="acme-system-one"/>
         <apikit:router config-ref="acme-system-one-api-config"/>
-        <exception-strategy ref="acme-system-one-api-apiKitGlobalExceptionMapping"/>
+        <exception-strategy ref="acme-system-api-apiKitGlobalExceptionMapping"/>
     </flow>
 
     <flow name="crm-system-capsil-console">
