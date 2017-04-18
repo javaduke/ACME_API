@@ -1,5 +1,6 @@
 %dw 1.0
 %input payload application/json
 %output application/xml
+#[flowVars['functions']]
 ---
-CreateGadget: payload
+CreateGadget: payload when not isEmpty(payload) otherwise {}

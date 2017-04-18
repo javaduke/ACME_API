@@ -1,0 +1,1 @@
+%var isEmpty = (str) -> (str == null or str is :blank or str == "")

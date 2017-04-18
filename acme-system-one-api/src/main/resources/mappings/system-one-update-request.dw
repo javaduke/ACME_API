@@ -1,5 +1,6 @@
 %dw 1.0
 %input payload application/json
 %output application/xml
+#[flowVars['functions']]
 ---
-UpdateGadget: payload
+UpdateGadget: payload when not isEmpty(payload) otherwise {}

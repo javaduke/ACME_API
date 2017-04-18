@@ -20,6 +20,11 @@
     <flow name="crm-system-capsil-main">
         <http:listener config-ref="api-httpListenerConfig" path="/acme-system-one-api/api/*"/>
         <set-variable variableName="systemName" value="acme-system-one"/>
+
+        <enricher target="#[flowVars['functions']]">
+            <parse-template location="common/mappings/Functions.dwlib"/>
+        </enricher>
+
         <apikit:router config-ref="acme-system-one-api-config"/>
         <exception-strategy ref="acme-system-api-apiKitGlobalExceptionMapping"/>
     </flow>
