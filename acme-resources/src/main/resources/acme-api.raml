@@ -6,7 +6,7 @@ mediaType: application/json
 
 /gadget:
   post:
-    displayName: Create a new Gadget
+    description: Create a new Gadget
     body:
       application/json:
         example: !include common/examples/CreateGadgetRequest.json
@@ -17,7 +17,7 @@ mediaType: application/json
           application/json:
             example: !include acme-api/examples/CreateGadgetResponse.json
   /{id}:
-    displayName: Update an existing Gadget
+    description: Update an existing Gadget
     put:
       body:
         application/json:
@@ -31,7 +31,7 @@ mediaType: application/json
 
 /widget:
   post:
-    displayName: Create a new Widget
+    description: Create a new Widget
     body:
       application/json:
         example: !include common/examples/CreateWidgetRequest.json
@@ -42,7 +42,7 @@ mediaType: application/json
           application/json:
             example: !include acme-api/examples/CreateWidgetResponse.json
   /{id}:
-    displayName: Update an existing Widget
+    description: Update an existing Widget
     put:
       body:
         application/json:

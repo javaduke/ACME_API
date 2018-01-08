@@ -76,6 +76,20 @@
             <groupId>com.mulesoft.security</groupId>
             <artifactId>mule-module-security-property-placeholder</artifactId>
             <version>1.6.0</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>mule-module-jersey</artifactId>
+                    <groupId>org.mule.modules</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>mule-module-json</artifactId>
+                    <groupId>org.mule.modules</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>mule-transport-http</artifactId>
+                    <groupId>org.mule.transports</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 

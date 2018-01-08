@@ -17,7 +17,7 @@
 
     <apikit:config name="acme-system-one-api-config" raml="acme-system-one-api.raml" consoleEnabled="false"/>
 
-    <flow name="crm-system-capsil-main">
+    <flow name="acme-system-one-main">
         <http:listener config-ref="api-httpListenerConfig" path="/acme-system-one-api/api/*"/>
         <set-variable variableName="systemName" value="acme-system-one"/>
 
@@ -29,7 +29,7 @@
         <exception-strategy ref="acme-system-api-apiKitGlobalExceptionMapping"/>
     </flow>
 
-    <flow name="crm-system-capsil-console">
+    <flow name="acme-system-one-console">
         <http:listener config-ref="api-httpListenerConfig" path="/acme-system-one-api/console/*"/>
         <apikit:console config-ref="acme-system-one-api-config"/>
     </flow>

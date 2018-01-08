@@ -3,7 +3,7 @@
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                     xmlns:http="http://www.mulesoft.org/schema/mule/http"
                     xmlns:domain="http://www.mulesoft.org/schema/mule/ee/domain"
-                    xmlns:jms="http://www.mulesoft.org/schema/mule/jms"
+
                     xsi:schemaLocation="
         http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
         http://www.mulesoft.org/schema/mule/ee/domain http://www.mulesoft.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
